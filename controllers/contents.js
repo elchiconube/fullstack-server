@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 import express from "express";
 
-import ContentMessage from "../models/contentMessage.js";
+import Content from "../models/content.js";
 
 const router = express.Router();
 
 export const getContents = async (req, res) => {
   try {
-    const postMessages = await ContentMessage.find();
+    const contents = await Content.find();
 
-    res.status(200).json(postMessages);
+    res.status(200).json(contents);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -19,23 +19,23 @@ export const getContent = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const post = await ContentMessage.findById(id);
+    const content = await Content.findById(id);
 
-    res.status(200).json(post);
+    res.status(200).json(content);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
 export const createContent = async (req, res) => {
-  const { title, message } = req.body;
+  const { title, description } = req.body;
 
-  const newContentMessage = new ContentMessage({ title, message });
+  const content = new Content({ title, description });
 
   try {
-    await newContentMessage.save();
+    await content.save();
 
-    res.status(201).json(newContentMessage);
+    res.status(201).json(content);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
@@ -43,14 +43,14 @@ export const createContent = async (req, res) => {
 
 export const updateContent = async (req, res) => {
   const { id } = req.params;
-  const { title, message } = req.body;
+  const { title, description } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
 
-  const updatedContent = { creator, title, _id: id };
+  const updatedContent = { title, description, _id: id };
 
-  await ContentMessage.findByIdAndUpdate(id, updatedContent, { new: true });
+  await Content.findByIdAndUpdate(id, updatedContent, { new: true });
 
   res.json(updatedContent);
 };
@@ -61,7 +61,7 @@ export const deleteContent = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
 
-  await ContentMessage.findByIdAndRemove(id);
+  await Content.findByIdAndRemove(id);
 
   res.json({ message: "Content deleted successfully." });
 };

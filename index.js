@@ -3,7 +3,9 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import pageRoutes from "./routes/pages.js";
 import contentRoutes from "./routes/contents.js";
+import componentsRoutes from "./routes/components.js";
 
 const app = express();
 
@@ -11,7 +13,9 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+app.use("/pages", pageRoutes);
 app.use("/contents", contentRoutes);
+app.use("/components", componentsRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://oscarbustos:oscarbustos123@cluster0.rh0hp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
