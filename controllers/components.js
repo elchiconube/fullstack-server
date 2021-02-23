@@ -15,7 +15,7 @@ export const getComponents = async (req, res) => {
   }
 };
 
-export const getComponents = async (req, res) => {
+export const getComponent = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -27,7 +27,7 @@ export const getComponents = async (req, res) => {
   }
 };
 
-export const createComponents = async (req, res) => {
+export const createComponent = async (req, res) => {
   const { title, description } = req.body;
 
   const component = new Components({ title, description });
@@ -41,7 +41,7 @@ export const createComponents = async (req, res) => {
   }
 };
 
-export const updateComponents = async (req, res) => {
+export const updateComponent = async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
 
@@ -55,7 +55,7 @@ export const updateComponents = async (req, res) => {
   res.json(updatedComponents);
 };
 
-export const deleteComponents = async (req, res) => {
+export const deleteComponent = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))

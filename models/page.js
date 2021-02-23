@@ -17,7 +17,7 @@ const pageSchema = mongoose.Schema({
   },
   components: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Component",
     },
   ],

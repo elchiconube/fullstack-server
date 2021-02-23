@@ -9,14 +9,14 @@ const componentSchema = mongoose.Schema({
   },
   page: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Page",
       required: true,
     },
   ],
   contents: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Content",
     },
   ],

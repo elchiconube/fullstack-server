@@ -6,7 +6,7 @@ import {
   createPage,
   updatePage,
   deletePage,
-} from "../controllers/contents.js";
+} from "../controllers/pages.js";
 
 const router = express.Router();
 

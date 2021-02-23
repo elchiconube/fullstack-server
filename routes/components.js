@@ -6,7 +6,7 @@ import {
   createComponent,
   updateComponent,
   deleteComponent,
-} from "../controllers/contents.js";
+} from "../controllers/components.js";
 
 const router = express.Router();
 
