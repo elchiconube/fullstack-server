@@ -8,7 +8,7 @@ const router = express.Router();
 export const getPages = async (req, res) => {
   try {
     const pages = await Page.find();
-
+    console.log(pages);
     res.status(200).json(pages);
   } catch (error) {
     res.status(404).json({ message: error.message });
