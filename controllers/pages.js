@@ -8,7 +8,6 @@ const router = express.Router();
 export const getPages = async (req, res) => {
   try {
     const pages = await Page.find();
-    console.log(pages);
     res.status(200).json(pages);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -28,9 +27,9 @@ export const getPage = async (req, res) => {
 };
 
 export const createPage = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, components } = req.body;
 
-  const page = new Page({ title, description });
+  const page = new Page({ title, description, components });
 
   try {
     await page.save();
@@ -43,12 +42,12 @@ export const createPage = async (req, res) => {
 
 export const updatePage = async (req, res) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { title, description, components } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
 
-  const updatedPage = { title, description, _id: id };
+  const updatedPage = { title, description, components, _id: id };
 
   await Page.findByIdAndUpdate(id, updatedPage, { new: true });
 
