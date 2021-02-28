@@ -28,9 +28,9 @@ export const getComponent = async (req, res) => {
 };
 
 export const createComponent = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, type, list } = req.body;
 
-  const component = new Components({ title, description });
+  const component = new Components({ title, description, type, list });
 
   try {
     await component.save();
@@ -43,12 +43,12 @@ export const createComponent = async (req, res) => {
 
 export const updateComponent = async (req, res) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { title, description, type, list } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No post with id: ${id}`);
 
-  const updatedComponents = { title, description, _id: id };
+  const updatedComponents = { title, description, type, list, _id: id };
 
   await Components.findByIdAndUpdate(id, updatedComponents, { new: true });
 

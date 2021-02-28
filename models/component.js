@@ -1,25 +1,14 @@
 import mongoose from "mongoose";
 
 const componentSchema = mongoose.Schema({
+  type: String,
   title: String,
   description: String,
+  lists: { type: Array, default: [] },
   createdAt: {
     type: Date,
     default: new Date(),
   },
-  page: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Page",
-      required: true,
-    },
-  ],
-  contents: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Content",
-    },
-  ],
 });
 
 const Component = mongoose.model("Component", componentSchema);
